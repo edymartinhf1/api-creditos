@@ -1,18 +1,20 @@
 package com.bootcamp.bank.creditos.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 
 /**
  * Clase Util
  */
-public class Util {
+@NoArgsConstructor(access= AccessLevel.PRIVATE)
+public final class Util {
 
-    private Util() {
-    }
 
-    private static Random random = new Random();
+    private static SecureRandom random = new SecureRandom();
 
     public static int generateRandomNumber(int min, int max) {
         return random.nextInt(max - min + 1) + min;
