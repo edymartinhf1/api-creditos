@@ -86,7 +86,7 @@ public class CreditoServiceImpl implements CreditoServiceI {
 
     @Override
     public Flux<CreditoProductoDao> findByIdClienteAndTipoCredito(String idCliente, String tipoCredito) {
-        return null;
+        return creditoProductoRepository.findByIdClienteAndTipoCredito(idCliente,tipoCredito);
     }
 
     /**

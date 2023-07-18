@@ -11,7 +11,7 @@ public interface CreditoProductoRepository extends ReactiveMongoRepository<Credi
     @Query("{'idCliente':?0}")
     Flux<CreditoProductoDao> findByIdCliente(String idCliente);
 
-    Flux<CreditoProductoDao> findByIdClienteAndTipoCredito(String numeroCuenta,String tipoOperacion);
+    Flux<CreditoProductoDao> findByIdClienteAndTipoCredito(String idCliente,String tipoCredito);
 
 
 }
