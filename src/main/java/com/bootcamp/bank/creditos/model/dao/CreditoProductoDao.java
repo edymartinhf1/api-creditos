@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
+
 @Data
 @Document("creditosproductos")
 public class CreditoProductoDao {
@@ -16,6 +18,8 @@ public class CreditoProductoDao {
     private String  numeroTarjeta;
     private String  fechaCreacion;
     private Double  lineaCredito;
+    private BigDecimal montoDeudaVencida;
+    private Boolean flgDeudaVencida;
 
 
 }
