@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Document("creditosproductos")
@@ -14,12 +14,13 @@ public class CreditoProductoDao {
     private String idCliente;
     private String estado;
     private String tipoCredito; // PER = personal , EMP = empresarial , TJC = tarjeta de credito
-    private String  numeroCredito;
-    private String  numeroTarjeta;
-    private String  fechaCreacion;
-    private Double  lineaCredito;
-    private BigDecimal montoDeudaVencida;
-    private Boolean flgDeudaVencida;
+    private String numeroCredito;
+    private String numeroTarjetaCredito;
+    private LocalDateTime fechaCreacion;
+    private String fechaCreacionT;
+    private LocalDateTime fechaPagoVencimiento;
+    private Double lineaCredito;
+
 
 
 }

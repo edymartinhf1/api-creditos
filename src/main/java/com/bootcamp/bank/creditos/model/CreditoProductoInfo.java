@@ -5,13 +5,15 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class CreditoProducto {
+public class CreditoProductoInfo {
     private String  idCliente;
-    private String  tipoCredito; // PER = personal , EMP = empresarial , TJC = tarjeta de credito
+    private String  tipoCredito;
     private String  numeroCredito;
     private String  numeroTarjetaCredito;
     private LocalDateTime fechaCreacion;
-    private String  fechaCreacionT;
     private Double  lineaCredito;
+    private Double pagos;
+    private Double consumos;
+    private Double saldo;
 
 }

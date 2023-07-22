@@ -8,8 +8,9 @@ public class CreditoTarjeta extends CreditoA{
         int randomNumber = Util.generateRandomNumber(1, 100000);
         super.setTipoCredito("TJC");
         super.setNumeroCredito("TJC"+Integer.toString(randomNumber));
-        super.setNumeroTarjeta("TAR-"+Integer.toString(randomNumber));
-        super.setFechaCreacion (Util.getCurrentDateAsString("dd/MM/yyyy"));
+        super.setNumeroTarjetaCredito("TAR-"+Integer.toString(randomNumber));
+        super.setFechaCreacion (Util.getCurrentLocalDate());
+        super.setFechaCreacionT(Util.getCurrentDateAsString("dd/MM/yyyy"));
         super.setLineaCredito(25000.00); // linea de credito referencial
         super.setEstado("ACT");
     }

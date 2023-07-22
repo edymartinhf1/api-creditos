@@ -10,8 +10,8 @@ import reactor.core.publisher.Flux;
 public interface CreditoProductoRepository extends ReactiveMongoRepository<CreditoProductoDao,String> {
     @Query("{'idCliente':?0}")
     Flux<CreditoProductoDao> findByIdCliente(String idCliente);
-
     Flux<CreditoProductoDao> findByIdClienteAndTipoCredito(String idCliente,String tipoCredito);
+
 
 
 }

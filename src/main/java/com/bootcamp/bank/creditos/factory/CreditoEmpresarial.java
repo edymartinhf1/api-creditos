@@ -8,7 +8,8 @@ public class CreditoEmpresarial extends  CreditoA{
         this.setTipoCredito("EMP");
         int randomNumber = Util.generateRandomNumber(1, 100000);
         this.setNumeroCredito("EMP".concat(Integer.toString(randomNumber)));
-        this.setFechaCreacion (Util.getCurrentDateAsString("dd/MM/yyyy"));
+        this.setFechaCreacionT(Util.getCurrentDateAsString("dd/MM/yyyy"));
+        this.setFechaCreacion (Util.getCurrentLocalDate());
         this.setLineaCredito(50000.00); // linea de credito referencial
         this.setEstado("ACT");
     }

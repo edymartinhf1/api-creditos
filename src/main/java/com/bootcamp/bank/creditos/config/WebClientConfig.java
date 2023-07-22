@@ -11,4 +11,15 @@ public class WebClientConfig {
     public WebClient webClientClientes() {
         return WebClient.create("http://localhost:8081");
     }
+
+    @Bean(name = "clientConsumos")
+    public WebClient webClientConsumos() {
+        return WebClient.create("http://localhost:8085");
+    }
+
+    @Bean(name = "clientPagos")
+    public WebClient webClientPagos() {
+        return WebClient.create("http://localhost:8086");
+    }
+
 }
