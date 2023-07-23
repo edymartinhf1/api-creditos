@@ -20,6 +20,8 @@ public class CreditoProductoDao {
     private String fechaCreacionT;
     private LocalDateTime fechaPagoVencimiento;
     private Double lineaCredito;
+    private String diaCierreMes;
+    private Boolean flgDeuda;
 
 
 

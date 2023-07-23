@@ -24,7 +24,7 @@ public class CreditoDeudasServiceImpl implements CreditoDeudasService {
     private final ClientApiPagos clientApiPagos;
 
     @Override
-    public Flux<CreditoProductoInfo> getCreditDebtPorIdCliente(String idCliente) {
+    public Flux<CreditoProductoInfo> getCreditosConDeudaPorIdCliente(String idCliente) {
 
         return creditoProductoRepository.findByIdCliente(idCliente)
                 .flatMap(creditoProductoDao -> {
@@ -36,12 +36,14 @@ public class CreditoDeudasServiceImpl implements CreditoDeudasService {
                         creditoProductoInfo.setNumeroTarjetaCredito(creditoProductoDao.getNumeroTarjetaCredito());
                         creditoProductoInfo.setLineaCredito(creditoProductoDao.getLineaCredito());
                         creditoProductoInfo.setFechaCreacion(creditoProductoDao.getFechaCreacion());
+                        creditoProductoInfo.setDiaCierreMes(creditoProductoDao.getDiaCierreMes());
                         creditoProductoInfo.setPagos(pagos);
                         creditoProductoInfo.setConsumos(consumos);
                         creditoProductoInfo.setSaldo(creditoProductoDao.getLineaCredito()+pagos+(consumos*-1));
                         return  creditoProductoInfo;
                     });
                 });
+
     }
 
 

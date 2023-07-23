@@ -8,6 +8,7 @@ import com.bootcamp.bank.creditos.model.dao.CreditoProductoDao;
 import com.bootcamp.bank.creditos.model.dao.repository.CreditoProductoRepository;
 import com.bootcamp.bank.creditos.model.enums.CreditosTipoTypes;
 import com.bootcamp.bank.creditos.model.enums.PerfilClienteTypes;
+import com.bootcamp.bank.creditos.service.CreditoDeudasService;
 import com.bootcamp.bank.creditos.service.CreditoServiceI;
 import com.bootcamp.bank.creditos.strategy.clientes.PerfilClienteStrategy;
 import com.bootcamp.bank.creditos.strategy.clientes.PerfilClienteStrategyFactory;
@@ -35,6 +36,8 @@ public class CreditoServiceImpl implements CreditoServiceI {
     private final CreditoProductoStrategyFactory creditoProductoStrategyFactory;
 
     private final PerfilClienteStrategyFactory perfilClienteStrategyFactory;
+
+    private final CreditoDeudasService creditoDeudasService;
 
     @Value("${tipo.credito.personal}")  String tipoCreditoPersonal;
 
@@ -64,7 +67,7 @@ public class CreditoServiceImpl implements CreditoServiceI {
                     CreditosTipoTypes cred= setTipoCredito.apply(creditoProductoDao.getTipoCredito());
                     CreditoProductoStrategy strategy= creditoProductoStrategyFactory.getStrategy(cred);
 
-                    return strategy.registrarCredito(creditoProductoRepository,creditoProductoDao);
+                    return strategy.registrarCredito(creditoProductoRepository,creditoDeudasService,creditoProductoDao);
 
                 });
 

@@ -10,6 +10,7 @@ public class CreditoProductoPost {
     private String  numeroTarjetaCredito;
     private String  fechaCreacion;
     private Double  lineaCredito;
+    private String  diaCierreMes;
 
 
 }

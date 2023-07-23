@@ -15,5 +15,6 @@ public class CreditoProductoInfo {
     private Double pagos;
     private Double consumos;
     private Double saldo;
+    private String diaCierreMes;
 
 }

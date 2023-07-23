@@ -13,5 +13,7 @@ public class CreditoProducto {
     private LocalDateTime fechaCreacion;
     private String  fechaCreacionT;
     private Double  lineaCredito;
+    private String diaCierreMes;
+    private Boolean flgDeuda;
 
 }

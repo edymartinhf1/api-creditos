@@ -9,22 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
+/**
+ * Clase Creditos con informacion de saldos y deuda
+ */
 @RestController
-@RequestMapping("/creditos/deuda")
+@RequestMapping("/creditos/deudas")
 @RequiredArgsConstructor
 public class CreditosDeudasController {
 
     private final CreditoDeudasService creditoDeudasService;
 
     /**
-     * Permite obtener creditos Con info de deuda por Id cliente
+     * Permite obtener lista de creditos con deuda por Id cliente
      * Entregable 3
      * @param idCliente
      * @return
      */
-    @GetMapping("/{idCliente}")
-    public Flux<CreditoProductoInfo> getCreditDebtPorIdCliente(@PathVariable String idCliente){
-        return creditoDeudasService.getCreditDebtPorIdCliente(idCliente);
+    @GetMapping("/cliente/{idCliente}")
+    public Flux<CreditoProductoInfo> getCreditosConDeudaPorIdCliente(@PathVariable String idCliente){
+        return creditoDeudasService.getCreditosConDeudaPorIdCliente(idCliente);
     }
 
 }

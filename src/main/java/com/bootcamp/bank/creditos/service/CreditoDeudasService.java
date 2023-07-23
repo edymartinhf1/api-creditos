@@ -5,5 +5,5 @@ import com.bootcamp.bank.creditos.model.CreditoProductoInfo;
 import reactor.core.publisher.Flux;
 
 public interface CreditoDeudasService {
-    Flux<CreditoProductoInfo> getCreditDebtPorIdCliente(String idCliente);
+    Flux<CreditoProductoInfo> getCreditosConDeudaPorIdCliente(String idCliente);
 }
