@@ -42,7 +42,11 @@ public class CreditoServiceImpl implements CreditoServiceI {
     @Value("${tipo.credito.personal}")  String tipoCreditoPersonal;
 
     /**
-     * Generacion de creditos
+     * Registro de productos de credito
+     * verificacion de id cliente
+     * parametrizacion de propiedades segun tipo de credito
+     * perfiles de cliente
+     * registro de producto credito segun tipo de credito
      * @param creditoProductoDao
      * @return
      */
@@ -110,11 +114,7 @@ public class CreditoServiceImpl implements CreditoServiceI {
     @Override
     public Mono<CreditoProductoDao> update(CreditoProductoDao creditoProductoDao) {
         return clientApiClientes.getClientes(creditoProductoDao.getIdCliente())
-                .flatMap(cliente->{
-                    return creditoProductoRepository.save(creditoProductoDao);
-                });
-
-
+                .flatMap(cliente->creditoProductoRepository.save(creditoProductoDao));
     }
     /**
      * Permite eliminar un producto credito por id

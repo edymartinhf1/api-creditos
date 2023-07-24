@@ -21,7 +21,7 @@ public class CreditoTarjetaCreditoStrategy implements CreditoProductoStrategy{
                 .flatMap(listDeudas -> {
                     if (!listDeudas.isEmpty()) {
                         log.info(" contiene productos de credito con deuda - id cliente");
-                        return Mono.error(() -> new BusinessException(" contiene productos de credito con deuda "));
+                        return Mono.error(() -> new BusinessException(" contiene productos de credito con deuda, no puede generarse producto de credito "));
                     }
                     return creditoProductoRepository.save(creditoProductoDao);
                 });

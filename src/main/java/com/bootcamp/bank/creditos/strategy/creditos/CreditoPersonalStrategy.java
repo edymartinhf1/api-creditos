@@ -31,9 +31,7 @@ public class CreditoPersonalStrategy implements CreditoProductoStrategy{
                     }
                     return creditoProductoRepository.findByIdClienteAndTipoCredito(creditoProductoDao.getIdCliente(), "PER")
                             .collectList()
-                            .flatMap(listaCreditos -> {
-                                return listaCreditos.isEmpty() ? creditoProductoRepository.save(creditoProductoDao) : Mono.error(() -> new BusinessException("Eli cliente ya posee un credito personal "));
-                            });
+                            .flatMap(listaCreditos -> listaCreditos.isEmpty() ? creditoProductoRepository.save(creditoProductoDao) : Mono.error(() -> new BusinessException("Eli cliente ya posee un credito personal ")));
                 });
     }
 }

@@ -23,10 +23,17 @@ public class CreditoDeudasServiceImpl implements CreditoDeudasService {
 
     private final ClientApiPagos clientApiPagos;
 
+    /**
+     * Permite obtener informacion de productos de creditos con deuda por id cliente
+     * @param idCliente
+     * @return
+     */
     @Override
     public Flux<CreditoProductoInfo> getCreditosConDeudaPorIdCliente(String idCliente) {
 
         return creditoProductoRepository.findByIdCliente(idCliente)
+                .filter(creditoProductoInfo -> creditoProductoInfo.getFlgDeuda()!=null)
+                .filter(creditoProductoInfo -> creditoProductoInfo.getFlgDeuda())
                 .flatMap(creditoProductoDao -> {
                     log.info(" credito producto "+creditoProductoDao.toString());
                     return Mono.zip(getConsumnos(creditoProductoDao.getNumeroCredito()), getPagos(creditoProductoDao.getNumeroCredito()), (consumos,pagos)->{
@@ -37,13 +44,13 @@ public class CreditoDeudasServiceImpl implements CreditoDeudasService {
                         creditoProductoInfo.setLineaCredito(creditoProductoDao.getLineaCredito());
                         creditoProductoInfo.setFechaCreacion(creditoProductoDao.getFechaCreacion());
                         creditoProductoInfo.setDiaCierreMes(creditoProductoDao.getDiaCierreMes());
+                        creditoProductoInfo.setFlgDeuda(creditoProductoDao.getFlgDeuda());
                         creditoProductoInfo.setPagos(pagos);
                         creditoProductoInfo.setConsumos(consumos);
                         creditoProductoInfo.setSaldo(creditoProductoDao.getLineaCredito()+pagos+(consumos*-1));
                         return  creditoProductoInfo;
                     });
                 });
-
     }
 
 

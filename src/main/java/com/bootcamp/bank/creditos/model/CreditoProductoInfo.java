@@ -16,5 +16,6 @@ public class CreditoProductoInfo {
     private Double consumos;
     private Double saldo;
     private String diaCierreMes;
+    private Boolean flgDeuda;
 
 }
