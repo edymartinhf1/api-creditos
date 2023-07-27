@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class CreditoProducto {
+    private String id;
     private String  idCliente;
     private String  tipoCredito; // PER = personal , EMP = empresarial , TJC = tarjeta de credito
     private String  numeroCredito;
@@ -15,5 +16,6 @@ public class CreditoProducto {
     private Double  lineaCredito;
     private String diaCierreMes;
     private Boolean flgDeuda;
+    private String codigo;
 
 }

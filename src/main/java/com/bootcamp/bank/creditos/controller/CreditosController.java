@@ -4,21 +4,30 @@ import com.bootcamp.bank.creditos.model.CreditoProducto;
 import com.bootcamp.bank.creditos.model.CreditoProductoPost;
 import com.bootcamp.bank.creditos.model.dao.CreditoProductoDao;
 import com.bootcamp.bank.creditos.service.CreditoServiceI;
+
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
+
+import org.springframework.cloud.client.circuitbreaker.ReactiveCircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.ReactiveCircuitBreakerFactory;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
 
 /**
  * Clase Controller gestion de creditos
  */
 @RestController
 @RequestMapping("/creditos")
+@Log4j2
 @RequiredArgsConstructor
 public class CreditosController {
 
     private final CreditoServiceI creditoServiceI;
+
+    private final ReactiveCircuitBreakerFactory cbFactory;
 
     /**
      * Permite crear producto de credito
@@ -47,8 +56,10 @@ public class CreditosController {
      */
     @GetMapping("/{id}")
     public Mono<CreditoProducto> findById(@PathVariable String id) {
-        return creditoServiceI.findById(id)
-                .map(this::fromCreditoProductoDaoToCreditoProductoDto);
+        ReactiveCircuitBreaker rcb=cbFactory.create("findByIdCB");
+        log.info("findById");
+        return rcb.run(creditoServiceI.findById(id)
+                .map(this::fromCreditoProductoDaoToCreditoProductoDto), fallback -> Mono.just(new CreditoProducto()));
     }
 
 
@@ -59,8 +70,10 @@ public class CreditosController {
      */
     @GetMapping("/cliente/{idCliente}")
     public Flux<CreditoProducto> findClienteByIdCliente(@PathVariable String idCliente) {
-        return creditoServiceI.findByIdCliente(idCliente)
-                .map(this::fromCreditoProductoDaoToCreditoProductoDto);
+        ReactiveCircuitBreaker rcb=cbFactory.create("findByIdCliCB");
+        return rcb.run(creditoServiceI.findByIdCliente(idCliente)
+                .map(this::fromCreditoProductoDaoToCreditoProductoDto), fallback -> Flux.just(new CreditoProducto()));
+
     }
 
     @GetMapping("/client/{idCliente}/tipo/{tipoCredito}")
@@ -103,5 +116,8 @@ public class CreditosController {
         BeanUtils.copyProperties(creditoProductoPost,creditoProductoDao);
         return creditoProductoDao;
     }
+
+
+
 
 }
